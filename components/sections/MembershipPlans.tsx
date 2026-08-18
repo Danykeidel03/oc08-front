@@ -9,9 +9,8 @@ const PLAN: MembershipPlan = {
   period: "/ año",
   description: "Un pago, un año entero remando con nosotros.",
   benefits: [
-    "Carnet digital de socio",
+    "Carnet fisico de socio",
     "Acceso a sorteos y actos del grupo",
-    "Voto en asambleas ordinarias",
     "Bufanda de la temporada",
     "Prioridad en desplazamientos organizados",
     "Descuento en la tienda del grupo",
@@ -42,23 +41,13 @@ function CheckIcon() {
 function PlanCard({ plan }: { plan: MembershipPlan }) {
   return (
     <div className="flex flex-col overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-[var(--shadow-card)]">
-      <div className="relative h-44 overflow-hidden border-b border-[var(--color-border)]">
-        <div
-          className="absolute inset-0"
-          style={{ backgroundImage: "var(--stripes-primary)" }}
-        />
+      <div className="relative aspect-[3/2] overflow-hidden border-b border-[var(--color-border)]">
         <Image
-          src="/images/logo.png"
-          alt=""
-          aria-hidden="true"
+          src="/images/logo_carnet.jpeg"
+          alt="Carnet de socio"
           fill
-          className="scale-125 object-contain opacity-10 grayscale"
+          className="object-cover"
         />
-        <div className="absolute top-1/2 left-1/2 w-[150%] -translate-x-1/2 -translate-y-1/2 -rotate-6 bg-[var(--color-primary)] py-2 text-center shadow-md">
-          <span className="font-display text-lg font-bold tracking-[0.15em] text-white uppercase">
-            {plan.name}
-          </span>
-        </div>
       </div>
 
       <div className="flex flex-1 flex-col gap-6 p-8">
