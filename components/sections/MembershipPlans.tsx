@@ -1,0 +1,113 @@
+import Image from "next/image";
+import { LinkButton } from "@/components/ui/Button";
+import type { MembershipPlan } from "@/types/membership";
+
+const PLAN: MembershipPlan = {
+  id: "anual",
+  name: "Socio",
+  price: "30€",
+  period: "/ año",
+  description: "Un pago, un año entero remando con nosotros.",
+  benefits: [
+    "Carnet digital de socio",
+    "Acceso a sorteos y actos del grupo",
+    "Voto en asambleas ordinarias",
+    "Bufanda de la temporada",
+    "Prioridad en desplazamientos organizados",
+    "Descuento en la tienda del grupo",
+  ],
+  ctaLabel: "Hazte socio",
+  ctaHref: "mailto:hazte-socio@orgullocazurro.example?subject=Alta%20Socio",
+};
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden="true"
+      className="h-5 w-5 shrink-0 text-[var(--color-primary)]"
+    >
+      <path
+        d="M4 10.5l3.5 3.5L16 5.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PlanCard({ plan }: { plan: MembershipPlan }) {
+  return (
+    <div className="flex flex-col overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-[var(--shadow-card)]">
+      <div className="relative h-44 overflow-hidden border-b border-[var(--color-border)]">
+        <div
+          className="absolute inset-0"
+          style={{ backgroundImage: "var(--stripes-primary)" }}
+        />
+        <Image
+          src="/images/logo.png"
+          alt=""
+          aria-hidden="true"
+          fill
+          className="scale-125 object-contain opacity-10 grayscale"
+        />
+        <div className="absolute top-1/2 left-1/2 w-[150%] -translate-x-1/2 -translate-y-1/2 -rotate-6 bg-[var(--color-primary)] py-2 text-center shadow-md">
+          <span className="font-display text-lg font-bold tracking-[0.15em] text-white uppercase">
+            {plan.name}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-6 p-8">
+        <p className="text-sm text-[var(--color-muted)]">{plan.description}</p>
+
+        <p className="flex items-baseline gap-1">
+          <span className="text-4xl font-bold text-white">{plan.price}</span>
+          <span className="text-sm text-[var(--color-muted)]">{plan.period}</span>
+        </p>
+
+        <LinkButton
+          href={plan.ctaHref}
+          variant="ghost"
+          className="w-full"
+        >
+          {plan.ctaLabel}
+        </LinkButton>
+
+        <ul className="flex flex-col gap-3">
+          {plan.benefits.map((benefit) => (
+            <li
+              key={benefit}
+              className="flex items-start gap-2 text-sm text-[var(--color-muted)]"
+            >
+              <CheckIcon />
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export function MembershipPlans() {
+  return (
+    <section id="planes" className="mx-auto max-w-6xl px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <h2 className="font-display text-3xl font-bold tracking-tight text-white uppercase sm:text-4xl">
+          Hazte socio
+        </h2>
+        <p className="mt-4 text-[var(--color-muted)]">
+          No hay letra pequeña ni categorías. Un compromiso, un precio.
+        </p>
+      </div>
+
+      <div className="mx-auto mt-16 max-w-md">
+        <PlanCard plan={PLAN} />
+      </div>
+    </section>
+  );
+}
