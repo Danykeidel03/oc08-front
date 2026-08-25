@@ -37,15 +37,6 @@ const SOCIAL_LINKS = [
       </svg>
     ),
   },
-  {
-    label: "Telegram",
-    href: "#",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4">
-        <path d="M21.6 3.6 2.9 11c-.8.3-.8 1.5 0 1.8l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.3l2.5-2.7 4.6 3.4c.7.5 1.7.1 1.9-.7l3.1-14.6c.2-1-.7-1.9-1.4-1.6ZM8.8 13.7l8.6-6.5c.3-.2.6.2.3.4l-7 6.6-.3 3.1-1.6-3.6Z" />
-      </svg>
-    ),
-  },
 ];
 
 export function SiteFooter() {
@@ -85,7 +76,7 @@ export function SiteFooter() {
           </ul>
 
           <p className="mt-2 text-sm text-[var(--color-muted)]">
-            info@orgullocazurro.example
+            ultrascultural@gmail.com
           </p>
         </div>
 
