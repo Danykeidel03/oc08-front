@@ -1,7 +1,8 @@
 export type MembershipPlan = {
   id: string;
   name: string;
-  price: string;
+  priceNew: string;
+  priceRenewal: string;
   period: string;
   description: string;
   benefits: string[];

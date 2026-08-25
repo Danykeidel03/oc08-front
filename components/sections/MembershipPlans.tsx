@@ -5,28 +5,30 @@ import type { MembershipPlan } from "@/types/membership";
 const PLAN: MembershipPlan = {
   id: "anual",
   name: "Socio",
-  price: "30€",
+  priceNew: "25€",
+  priceRenewal: "22€",
   period: "· TEMPORADA 26/27",
   description: "Tu aportación nos ayuda a seguir haciendo más grande la grada.",
   benefits: [
-    "Carnet fisico de socio",
-    "Acceso a sorteos y actos del grupo",
-    "Bufanda de la temporada",
-    "Prioridad en desplazamientos organizados",
-    "Descuento en la tienda del grupo",
+    "Carnet oficial de socio",
+    "Bufanda oficial de regalo",
+    "Ventajas exclusivas en el local",
+    "Actividades e iniciativas del grupo",
+    "Sé parte del grupo",
+    "Descuentos en la tienda del grupo",
   ],
   ctaLabel: "Hazte socio ✓",
   ctaHref:
     "https://docs.google.com/forms/d/e/1FAIpQLSeCc2q0P5zvtcksg9be5wJGKVcDzCzElA83VV8oxkFUd8y8EA/viewform",
 };
 
-function CheckIcon() {
+function CheckIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 20 20"
       fill="none"
       aria-hidden="true"
-      className="h-5 w-5 shrink-0 text-[var(--color-primary)]"
+      className={`${className} mt-0.5 shrink-0 text-[var(--color-primary)]`}
     >
       <path
         d="M4 10.5l3.5 3.5L16 5.5"
@@ -51,13 +53,52 @@ function PlanCard({ plan }: { plan: MembershipPlan }) {
         />
       </div>
 
-      <div className="flex flex-1 flex-col gap-6 p-8">
+      <div className="flex flex-col gap-1.5 border-b border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-4">
+        <p className="text-center text-[11px] font-semibold tracking-wide text-white uppercase">
+          Bufanda de regalo al hacerte socio
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="relative aspect-[2048/299] overflow-hidden rounded">
+            <Image
+              src="/images/west_front.jpeg"
+              alt="Bufanda oficial - anverso"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[2048/299] overflow-hidden rounded">
+            <Image
+              src="/images/west_back.jpeg"
+              alt="Bufanda oficial - reverso"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-4 p-6">
         <p className="text-sm text-[var(--color-muted)]">{plan.description}</p>
 
-        <p className="flex items-baseline gap-1">
-          <span className="text-4xl font-bold text-white">{plan.price}</span>
-          <span className="text-sm text-[var(--color-muted)]">{plan.period}</span>
-        </p>
+        <div className="flex items-center gap-6">
+          <p className="flex flex-col">
+            <span className="text-xs text-[var(--color-muted)] uppercase">
+              Renovación
+            </span>
+            <span className="text-4xl font-bold text-white">
+              {plan.priceRenewal}
+            </span>
+          </p>
+          <p className="flex flex-col">
+            <span className="text-xs text-[var(--color-muted)] uppercase">
+              Nueva alta
+            </span>
+            <span className="text-4xl font-bold text-white">{plan.priceNew}</span>
+          </p>
+          <span className="ml-auto self-end text-sm text-[var(--color-muted)]">
+            {plan.period}
+          </span>
+        </div>
 
         <LinkButton
           href={plan.ctaHref}
@@ -69,13 +110,13 @@ function PlanCard({ plan }: { plan: MembershipPlan }) {
           {plan.ctaLabel}
         </LinkButton>
 
-        <ul className="flex flex-col gap-3">
+        <ul className="grid grid-cols-2 gap-x-3 gap-y-2">
           {plan.benefits.map((benefit) => (
             <li
               key={benefit}
-              className="flex items-start gap-2 text-sm text-[var(--color-muted)]"
+              className="flex items-start gap-1.5 text-xs leading-snug text-[var(--color-muted)]"
             >
-              <CheckIcon />
+              <CheckIcon className="h-4 w-4" />
               <span>{benefit}</span>
             </li>
           ))}

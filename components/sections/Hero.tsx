@@ -23,12 +23,12 @@ export function Hero() {
       />
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start gap-5 px-6 pb-16 sm:pb-20">
-        <span className="text-xs font-semibold tracking-[0.2em] text-[var(--color-primary)] uppercase">
+        <span className="text-xs font-semibold tracking-[0.2em] text-white uppercase">
           Cultural y Deportiva Leonesa
         </span>
 
         <h1 className="font-display max-w-2xl text-4xl leading-[1.05] font-bold tracking-tight text-white uppercase sm:text-6xl">
-          En casa no se falta a la grada.
+          LA CULTURAL NOS UNE. LA GRADA NOS REPRESENTA.
         </h1>
 
         <p className="max-w-xl text-base text-white/80 sm:text-lg">
