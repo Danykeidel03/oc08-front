@@ -32,12 +32,12 @@ export function Hero() {
         </h1>
 
         <p className="max-w-xl text-base text-white/80 sm:text-lg">
-          Orgullo Cazurro nace de la gente que no falta. Hazte socio y pon tu
-          nombre donde se sostiene el club: dentro.
+          Una temporada más, estaremos donde siempre: al lado de la Cultural,
+          en casa y allá donde nos lleve el escudo.
         </p>
 
         <LinkButton href="#planes" variant="ghost-white" className="mt-2">
-          Hazte socio
+          Hazte socio ✓
         </LinkButton>
       </div>
     </section>

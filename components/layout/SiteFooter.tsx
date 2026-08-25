@@ -3,7 +3,7 @@ import Image from "next/image";
 const SOCIAL_LINKS = [
   {
     label: "X (Twitter)",
-    href: "#",
+    href: "https://x.com/CazurroOrgullo",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4">
         <path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.9l-5.4-6.9L4.8 22H1.7l8.1-9.3L1 2h7.1l4.9 6.3L18.9 2Zm-1.2 18h1.9L7.4 4h-2l12.3 16Z" />
@@ -12,7 +12,7 @@ const SOCIAL_LINKS = [
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/orgullocazurro2008?igsi=MW94M255Nnp3NnR1cA==",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -25,6 +25,15 @@ const SOCIAL_LINKS = [
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    label: "YouTube",
+    href: "https://youtube.com/@orgullocazurro2008?si=DT_7rx8M69PbPNtE",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4 w-4">
+        <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.5v-7l6.3 3.5-6.3 3.5Z" />
       </svg>
     ),
   },
@@ -65,6 +74,8 @@ export function SiteFooter() {
                 <a
                   href={social.href}
                   aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border)] text-white hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
                 >
                   {social.icon}
@@ -97,8 +108,7 @@ export function SiteFooter() {
 
         <div className="flex items-start sm:justify-end">
           <p className="max-w-xs text-sm text-[var(--color-muted)] italic">
-            &ldquo;No somos hinchas de fin de semana. Somos los que no
-            faltan.&rdquo;
+            &ldquo;Nada está por encima, nada es más importante.&rdquo;
           </p>
         </div>
       </div>

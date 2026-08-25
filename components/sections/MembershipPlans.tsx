@@ -6,8 +6,8 @@ const PLAN: MembershipPlan = {
   id: "anual",
   name: "Socio",
   price: "30€",
-  period: "/ año",
-  description: "Un pago, un año entero remando con nosotros.",
+  period: "· TEMPORADA 26/27",
+  description: "Tu aportación nos ayuda a seguir haciendo más grande la grada.",
   benefits: [
     "Carnet fisico de socio",
     "Acceso a sorteos y actos del grupo",
@@ -15,8 +15,9 @@ const PLAN: MembershipPlan = {
     "Prioridad en desplazamientos organizados",
     "Descuento en la tienda del grupo",
   ],
-  ctaLabel: "Hazte socio",
-  ctaHref: "mailto:hazte-socio@orgullocazurro.example?subject=Alta%20Socio",
+  ctaLabel: "Hazte socio ✓",
+  ctaHref:
+    "https://docs.google.com/forms/d/e/1FAIpQLSeCc2q0P5zvtcksg9be5wJGKVcDzCzElA83VV8oxkFUd8y8EA/viewform",
 };
 
 function CheckIcon() {
@@ -62,6 +63,8 @@ function PlanCard({ plan }: { plan: MembershipPlan }) {
           href={plan.ctaHref}
           variant="ghost"
           className="w-full"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {plan.ctaLabel}
         </LinkButton>
@@ -90,7 +93,7 @@ export function MembershipPlans() {
           Hazte socio
         </h2>
         <p className="mt-4 text-[var(--color-muted)]">
-          No hay letra pequeña ni categorías. Un compromiso, un precio.
+          Una temporada. Un sentimiento. Un mismo compromiso.
         </p>
       </div>
 
