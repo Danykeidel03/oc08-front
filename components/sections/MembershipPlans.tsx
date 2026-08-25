@@ -7,7 +7,7 @@ const PLAN: MembershipPlan = {
   name: "Socio",
   priceNew: "25€",
   priceRenewal: "22€",
-  period: "· TEMPORADA 26/27",
+  period: "TEMPORADA 26/27",
   description: "Tu aportación nos ayuda a seguir haciendo más grande la grada.",
   benefits: [
     "Carnet oficial de socio",
@@ -80,22 +80,26 @@ function PlanCard({ plan }: { plan: MembershipPlan }) {
       <div className="flex flex-1 flex-col gap-4 p-6">
         <p className="text-sm text-[var(--color-muted)]">{plan.description}</p>
 
-        <div className="flex items-center gap-6">
-          <p className="flex flex-col">
-            <span className="text-xs text-[var(--color-muted)] uppercase">
-              Renovación
-            </span>
-            <span className="text-4xl font-bold text-white">
-              {plan.priceRenewal}
-            </span>
-          </p>
-          <p className="flex flex-col">
-            <span className="text-xs text-[var(--color-muted)] uppercase">
-              Nueva alta
-            </span>
-            <span className="text-4xl font-bold text-white">{plan.priceNew}</span>
-          </p>
-          <span className="ml-auto self-end text-sm text-[var(--color-muted)]">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-6">
+            <p className="flex flex-col">
+              <span className="text-xs whitespace-nowrap text-[var(--color-muted)] uppercase">
+                Renovación
+              </span>
+              <span className="text-4xl font-bold text-white">
+                {plan.priceRenewal}
+              </span>
+            </p>
+            <p className="flex flex-col">
+              <span className="text-xs whitespace-nowrap text-[var(--color-muted)] uppercase">
+                Nueva alta
+              </span>
+              <span className="text-4xl font-bold text-white">
+                {plan.priceNew}
+              </span>
+            </p>
+          </div>
+          <span className="text-xs text-[var(--color-muted)]">
             {plan.period}
           </span>
         </div>
