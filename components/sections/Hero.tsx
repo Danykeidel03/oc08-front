@@ -12,6 +12,7 @@ export function Hero() {
         alt="Grada del estadio en un día de partido"
         fill
         priority
+        fetchPriority="high"
         className="object-cover"
       />
       <div
