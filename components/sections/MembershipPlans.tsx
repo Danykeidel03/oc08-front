@@ -46,7 +46,7 @@ function PlanCard({ plan }: { plan: MembershipPlan }) {
     <div className="flex flex-col overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-[var(--shadow-card)]">
       <div className="relative aspect-[3/2] overflow-hidden border-b border-[var(--color-border)]">
         <Image
-          src="/images/logo_carnet.jpeg"
+          src="/images/logo_carnet.webp"
           alt="Carnet de socio"
           fill
           className="object-cover"
@@ -60,7 +60,7 @@ function PlanCard({ plan }: { plan: MembershipPlan }) {
         <div className="grid grid-cols-2 gap-2">
           <div className="relative aspect-[2048/299] overflow-hidden rounded">
             <Image
-              src="/images/west_front.jpeg"
+              src="/images/west_front.webp"
               alt="Bufanda oficial - anverso"
               fill
               className="object-cover"
@@ -68,7 +68,7 @@ function PlanCard({ plan }: { plan: MembershipPlan }) {
           </div>
           <div className="relative aspect-[2048/299] overflow-hidden rounded">
             <Image
-              src="/images/west_back.jpeg"
+              src="/images/west_back.webp"
               alt="Bufanda oficial - reverso"
               fill
               className="object-cover"

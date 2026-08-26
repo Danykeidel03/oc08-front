@@ -8,7 +8,7 @@ export function Hero() {
       className="relative flex min-h-[80vh] items-end overflow-hidden sm:min-h-[88vh]"
     >
       <Image
-        src="/images/stadium.jpeg"
+        src="/images/stadium.webp"
         alt="Grada del estadio en un día de partido"
         fill
         priority

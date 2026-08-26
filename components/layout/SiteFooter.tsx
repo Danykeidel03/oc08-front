@@ -47,7 +47,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 sm:grid-cols-4">
         <div>
           <Image
-            src="/images/logo.png"
+            src="/images/logo.webp"
             alt="Escudo de Orgullo Cazurro"
             width={72}
             height={72}

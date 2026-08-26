@@ -7,7 +7,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3">
         <a href="#top" aria-label="Orgullo Cazurro — inicio">
           <Image
-            src="/images/logo.png"
+            src="/images/logo.webp"
             alt="Escudo de Orgullo Cazurro, afición de la Cultural y Deportiva Leonesa"
             width={52}
             height={52}
