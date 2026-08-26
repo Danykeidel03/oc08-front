@@ -32,8 +32,9 @@ export function Hero() {
         </h1>
 
         <p className="max-w-xl text-base text-white/80 sm:text-lg">
-          Una temporada más, estaremos donde siempre: al lado de la Cultural,
-          en casa y allá donde nos lleve el escudo.
+          Una temporada más, la afición ultra de la Cultural y Deportiva
+          Leonesa estará donde siempre: en casa y allá donde nos lleve el
+          escudo.
         </p>
 
         <LinkButton href="#planes" variant="ghost-white" className="mt-2">
