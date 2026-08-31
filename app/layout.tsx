@@ -10,7 +10,7 @@ const dmSans = DM_Sans({
 
 const title = "Orgullo Cazurro — Hazte socio";
 const description =
-  "Orgullo Cazurro, la afición ultra de la Cultural y Deportiva Leonesa. Hazte socio de la Cultural Leonesa y suma tu voz a la grada.";
+  "Orgullo Cazurro, la afición de la Cultural y Deportiva Leonesa. Hazte socio de la Cultural Leonesa y suma tu voz a la grada.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

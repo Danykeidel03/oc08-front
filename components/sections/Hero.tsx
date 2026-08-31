@@ -33,7 +33,7 @@ export function Hero() {
         </h1>
 
         <p className="max-w-xl text-base text-white/80 sm:text-lg">
-          Una temporada más, la afición ultra de la Cultural y Deportiva
+          Una temporada más, la afición de la Cultural y Deportiva
           Leonesa estará donde siempre: en casa y allá donde nos lleve el
           escudo.
         </p>
