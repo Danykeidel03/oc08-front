@@ -63,7 +63,7 @@ export default async function PanelProductosPage() {
                 {product.images[0] && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.images[0].url}`}
+                    src={product.images[0].url}
                     alt={product.name}
                     className="h-14 w-14 rounded-[var(--radius-sm)] object-cover"
                   />
