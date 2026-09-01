@@ -21,5 +21,5 @@ export async function loginAction(_prevState: { error: boolean }, formData: Form
     maxAge: 60 * 60 * 24 * 30,
   });
 
-  redirect("/panel/productos");
+  redirect("/panel");
 }

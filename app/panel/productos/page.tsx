@@ -30,6 +30,10 @@ export default async function PanelProductosPage() {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-4xl flex-col gap-6 px-4 py-10">
+      <Link href="/panel" className="text-sm text-[color:var(--color-muted)] underline">
+        ← Panel
+      </Link>
+
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-white">Productos</h1>
         <div className="flex items-center gap-3">
