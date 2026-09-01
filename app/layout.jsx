@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -12,7 +11,7 @@ const title = "Orgullo Cazurro — Hazte socio";
 const description =
   "Orgullo Cazurro, la afición de la Cultural y Deportiva Leonesa. Hazte socio de la Cultural Leonesa y suma tu voz a la grada.";
 
-export const metadata: Metadata = {
+export const metadata = {
   metadataBase: new URL(SITE_URL),
   title,
   description,
@@ -40,11 +39,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={`${dmSans.variable} antialiased`}>

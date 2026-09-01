@@ -1,12 +1,9 @@
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 import clsx from "clsx";
-
-type Variant = "primary" | "ghost" | "ghost-white";
 
 const baseClasses =
   "inline-flex items-center justify-center rounded-none px-6 py-3 text-sm font-semibold tracking-[0.08em] uppercase whitespace-nowrap transition-colors";
 
-const variantClasses: Record<Variant, string> = {
+const variantClasses = {
   primary:
     "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] active:translate-y-px",
   ghost:
@@ -15,17 +12,12 @@ const variantClasses: Record<Variant, string> = {
     "border border-white bg-transparent text-white hover:bg-white hover:text-[var(--color-primary)]",
 };
 
-type LinkButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  variant?: Variant;
-  href: string;
-};
-
 export function LinkButton({
   variant = "ghost",
   className,
   href,
   ...props
-}: LinkButtonProps) {
+}) {
   return (
     <a
       href={href}
@@ -35,16 +27,12 @@ export function LinkButton({
   );
 }
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: Variant;
-};
-
 export function Button({
   variant = "ghost",
   className,
   type = "button",
   ...props
-}: ButtonProps) {
+}) {
   return (
     <button
       type={type}
