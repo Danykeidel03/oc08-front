@@ -79,7 +79,15 @@ export default async function PanelProductosPage() {
                   </p>
                 </div>
               </div>
-              <ProductToggle id={product.id} enabled={product.enabled} />
+              <div className="flex items-center gap-3">
+                <Link
+                  href={`/panel/productos/${product.id}/editar`}
+                  className="text-sm text-[color:var(--color-muted)] underline"
+                >
+                  Editar
+                </Link>
+                <ProductToggle id={product.id} enabled={product.enabled} />
+              </div>
             </li>
           ))}
         </ul>

@@ -26,6 +26,36 @@ export async function toggleProductEnabled(id: string, enabled: boolean) {
   revalidatePath("/panel/productos");
 }
 
+export async function updateProduct(
+  id: string,
+  _prevState: { error: string | null },
+  formData: FormData,
+) {
+  const payload = {
+    name: formData.get("name"),
+    description: formData.get("description"),
+    price: formData.get("price"),
+    category: formData.get("category"),
+    badge: formData.get("badge"),
+    sizes: formData.get("sizes"),
+    inStock: formData.get("inStock") === "true",
+  };
+
+  const res = await fetch(backendUrl(`/api/products/${id}`), {
+    method: "PATCH",
+    headers: { ...adminHeaders(), "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    return { error: body?.error ?? "No se pudo actualizar el producto" };
+  }
+
+  revalidatePath("/panel/productos");
+  redirect("/panel/productos");
+}
+
 export async function createProduct(_prevState: { error: string | null }, formData: FormData) {
   const res = await fetch(backendUrl("/api/products"), {
     method: "POST",
