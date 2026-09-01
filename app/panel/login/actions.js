@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { isValidPanelPassword } from "@/lib/panelAuth";
 import { PANEL_SESSION_COOKIE } from "@/lib/panelSession";
 
-export async function loginAction(_prevState: { error: boolean }, formData: FormData) {
+export async function loginAction(_prevState, formData) {
   const password = String(formData.get("password") ?? "");
 
   if (!isValidPanelPassword(password)) {
@@ -13,7 +13,7 @@ export async function loginAction(_prevState: { error: boolean }, formData: Form
   }
 
   const cookieStore = await cookies();
-  cookieStore.set(PANEL_SESSION_COOKIE, process.env.PANEL_SESSION_SECRET!, {
+  cookieStore.set(PANEL_SESSION_COOKIE, process.env.PANEL_SESSION_SECRET, {
     httpOnly: true,
     secure: true,
     sameSite: "lax",

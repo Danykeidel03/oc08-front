@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { adminHeaders, backendUrl } from "@/lib/backend";
-import type { Product } from "@/types/product";
 import { updateProduct } from "../../actions";
 import { EditProductForm } from "./EditProductForm";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Panel — editar producto",
   robots: { index: false, follow: false },
 };
 
 export const dynamic = "force-dynamic";
 
-async function getProduct(id: string): Promise<Product | null> {
+async function getProduct(id) {
   const res = await fetch(backendUrl(`/api/products/admin/${id}`), {
     headers: adminHeaders(),
     cache: "no-store",
@@ -25,7 +23,7 @@ async function getProduct(id: string): Promise<Product | null> {
   return res.json();
 }
 
-export default async function EditarProductoPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EditarProductoPage({ params }) {
   const { id } = await params;
   const product = await getProduct(id);
 

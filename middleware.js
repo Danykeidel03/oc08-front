@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { PANEL_SESSION_COOKIE } from "@/lib/panelSession";
 
 export const config = {
   matcher: ["/panel/:path*"],
 };
 
-export function middleware(request: NextRequest) {
+export function middleware(request) {
   const { pathname } = request.nextUrl;
 
   if (pathname === "/panel/login") {

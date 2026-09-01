@@ -1,49 +1,31 @@
 "use client";
 
 import { useActionState } from "react";
-import { PRODUCT_CATEGORIES, PRODUCT_BADGES, type Product } from "@/types/product";
+import { createProduct } from "../actions";
+import { PRODUCT_CATEGORIES, PRODUCT_BADGES } from "@/lib/productOptions";
 
-type UpdateAction = (
-  prevState: { error: string | null },
-  formData: FormData,
-) => Promise<{ error: string | null }>;
+const initialState = { error: null };
 
-const initialState = { error: null as string | null };
-
-export function EditProductForm({ product, action }: { product: Product; action: UpdateAction }) {
-  const [state, formAction, pending] = useActionState(action, initialState);
+export function NewProductForm() {
+  const [state, formAction, pending] = useActionState(createProduct, initialState);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
       <Field label="Nombre">
-        <input name="name" type="text" required defaultValue={product.name} className={inputClass} />
+        <input name="name" type="text" required className={inputClass} />
       </Field>
 
       <Field label="Descripción">
-        <textarea
-          name="description"
-          required
-          rows={4}
-          defaultValue={product.description}
-          className={inputClass}
-        />
+        <textarea name="description" required rows={4} className={inputClass} />
       </Field>
 
       <div className="grid grid-cols-2 gap-4">
         <Field label="Precio (€)">
-          <input
-            name="price"
-            type="number"
-            step="0.01"
-            min="0"
-            required
-            defaultValue={product.price}
-            className={inputClass}
-          />
+          <input name="price" type="number" step="0.01" min="0" required className={inputClass} />
         </Field>
 
         <Field label="Categoría">
-          <select name="category" required defaultValue={product.category} className={inputClass}>
+          <select name="category" required className={inputClass}>
             {PRODUCT_CATEGORIES.map((category) => (
               <option key={category} value={category}>
                 {category}
@@ -55,7 +37,7 @@ export function EditProductForm({ product, action }: { product: Product; action:
 
       <div className="grid grid-cols-2 gap-4">
         <Field label="Badge (opcional)">
-          <select name="badge" className={inputClass} defaultValue={product.badge ?? ""}>
+          <select name="badge" className={inputClass} defaultValue="">
             <option value="">Sin badge</option>
             {PRODUCT_BADGES.map((badge) => (
               <option key={badge} value={badge}>
@@ -66,21 +48,19 @@ export function EditProductForm({ product, action }: { product: Product; action:
         </Field>
 
         <Field label="Tallas (separadas por coma)">
-          <input
-            name="sizes"
-            type="text"
-            placeholder="S,M,L,XL"
-            defaultValue={product.sizes?.join(",") ?? ""}
-            className={inputClass}
-          />
+          <input name="sizes" type="text" placeholder="S,M,L,XL" className={inputClass} />
         </Field>
       </div>
 
-      <Field label="Stock">
-        <select name="inStock" defaultValue={String(product.inStock)} className={inputClass}>
-          <option value="true">En stock</option>
-          <option value="false">Agotado</option>
-        </select>
+      <Field label="Fotos (hasta 6, jpg/png/webp)">
+        <input
+          name="images"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          multiple
+          required
+          className={inputClass}
+        />
       </Field>
 
       {state.error && (
@@ -94,13 +74,13 @@ export function EditProductForm({ product, action }: { product: Product; action:
         disabled={pending}
         className="rounded-[var(--radius-sm)] bg-[color:var(--color-accent)] px-4 py-3 font-semibold text-white transition disabled:opacity-60"
       >
-        {pending ? "Guardando..." : "Guardar cambios"}
+        {pending ? "Guardando..." : "Crear producto"}
       </button>
     </form>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }) {
   return (
     <label className="flex flex-col gap-2">
       <span className="text-sm text-[color:var(--color-muted)]">{label}</span>

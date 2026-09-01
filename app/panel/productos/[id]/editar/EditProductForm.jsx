@@ -1,31 +1,44 @@
 "use client";
 
 import { useActionState } from "react";
-import { createProduct } from "../actions";
-import { PRODUCT_CATEGORIES, PRODUCT_BADGES } from "@/types/product";
+import { PRODUCT_CATEGORIES, PRODUCT_BADGES } from "@/lib/productOptions";
 
-const initialState = { error: null as string | null };
+const initialState = { error: null };
 
-export function NewProductForm() {
-  const [state, formAction, pending] = useActionState(createProduct, initialState);
+export function EditProductForm({ product, action }) {
+  const [state, formAction, pending] = useActionState(action, initialState);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
       <Field label="Nombre">
-        <input name="name" type="text" required className={inputClass} />
+        <input name="name" type="text" required defaultValue={product.name} className={inputClass} />
       </Field>
 
       <Field label="Descripción">
-        <textarea name="description" required rows={4} className={inputClass} />
+        <textarea
+          name="description"
+          required
+          rows={4}
+          defaultValue={product.description}
+          className={inputClass}
+        />
       </Field>
 
       <div className="grid grid-cols-2 gap-4">
         <Field label="Precio (€)">
-          <input name="price" type="number" step="0.01" min="0" required className={inputClass} />
+          <input
+            name="price"
+            type="number"
+            step="0.01"
+            min="0"
+            required
+            defaultValue={product.price}
+            className={inputClass}
+          />
         </Field>
 
         <Field label="Categoría">
-          <select name="category" required className={inputClass}>
+          <select name="category" required defaultValue={product.category} className={inputClass}>
             {PRODUCT_CATEGORIES.map((category) => (
               <option key={category} value={category}>
                 {category}
@@ -37,7 +50,7 @@ export function NewProductForm() {
 
       <div className="grid grid-cols-2 gap-4">
         <Field label="Badge (opcional)">
-          <select name="badge" className={inputClass} defaultValue="">
+          <select name="badge" className={inputClass} defaultValue={product.badge ?? ""}>
             <option value="">Sin badge</option>
             {PRODUCT_BADGES.map((badge) => (
               <option key={badge} value={badge}>
@@ -48,19 +61,21 @@ export function NewProductForm() {
         </Field>
 
         <Field label="Tallas (separadas por coma)">
-          <input name="sizes" type="text" placeholder="S,M,L,XL" className={inputClass} />
+          <input
+            name="sizes"
+            type="text"
+            placeholder="S,M,L,XL"
+            defaultValue={product.sizes?.join(",") ?? ""}
+            className={inputClass}
+          />
         </Field>
       </div>
 
-      <Field label="Fotos (hasta 6, jpg/png/webp)">
-        <input
-          name="images"
-          type="file"
-          accept="image/jpeg,image/png,image/webp"
-          multiple
-          required
-          className={inputClass}
-        />
+      <Field label="Stock">
+        <select name="inStock" defaultValue={String(product.inStock)} className={inputClass}>
+          <option value="true">En stock</option>
+          <option value="false">Agotado</option>
+        </select>
       </Field>
 
       {state.error && (
@@ -74,13 +89,13 @@ export function NewProductForm() {
         disabled={pending}
         className="rounded-[var(--radius-sm)] bg-[color:var(--color-accent)] px-4 py-3 font-semibold text-white transition disabled:opacity-60"
       >
-        {pending ? "Guardando..." : "Crear producto"}
+        {pending ? "Guardando..." : "Guardar cambios"}
       </button>
     </form>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }) {
   return (
     <label className="flex flex-col gap-2">
       <span className="text-sm text-[color:var(--color-muted)]">{label}</span>

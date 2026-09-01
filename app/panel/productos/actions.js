@@ -12,7 +12,7 @@ export async function logoutAction() {
   redirect("/panel/login");
 }
 
-export async function toggleProductEnabled(id: string, enabled: boolean) {
+export async function toggleProductEnabled(id, enabled) {
   const res = await fetch(backendUrl(`/api/products/${id}/enabled`), {
     method: "PATCH",
     headers: { ...adminHeaders(), "Content-Type": "application/json" },
@@ -26,11 +26,7 @@ export async function toggleProductEnabled(id: string, enabled: boolean) {
   revalidatePath("/panel/productos");
 }
 
-export async function updateProduct(
-  id: string,
-  _prevState: { error: string | null },
-  formData: FormData,
-) {
+export async function updateProduct(id, _prevState, formData) {
   const payload = {
     name: formData.get("name"),
     description: formData.get("description"),
@@ -56,7 +52,7 @@ export async function updateProduct(
   redirect("/panel/productos");
 }
 
-export async function createProduct(_prevState: { error: string | null }, formData: FormData) {
+export async function createProduct(_prevState, formData) {
   const res = await fetch(backendUrl("/api/products"), {
     method: "POST",
     headers: adminHeaders(),

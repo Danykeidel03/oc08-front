@@ -1,18 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { adminHeaders, backendUrl } from "@/lib/backend";
-import type { Product } from "@/types/product";
 import { ProductToggle } from "./ProductToggle";
 import { logoutAction } from "./actions";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Panel — productos",
   robots: { index: false, follow: false },
 };
 
 export const dynamic = "force-dynamic";
 
-async function getProducts(): Promise<Product[]> {
+async function getProducts() {
   const res = await fetch(backendUrl("/api/products/admin/all"), {
     headers: adminHeaders(),
     cache: "no-store",

@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { LinkButton } from "@/components/ui/Button";
-import type { MembershipPlan } from "@/types/membership";
 
-const PLAN: MembershipPlan = {
+const PLAN = {
   id: "anual",
   name: "Socio",
   priceNew: "25€",
@@ -22,7 +21,7 @@ const PLAN: MembershipPlan = {
     "https://docs.google.com/forms/d/e/1FAIpQLSeCc2q0P5zvtcksg9be5wJGKVcDzCzElA83VV8oxkFUd8y8EA/viewform",
 };
 
-function CheckIcon({ className = "h-5 w-5" }: { className?: string }) {
+function CheckIcon({ className = "h-5 w-5" }) {
   return (
     <svg
       viewBox="0 0 20 20"
@@ -41,7 +40,7 @@ function CheckIcon({ className = "h-5 w-5" }: { className?: string }) {
   );
 }
 
-function PlanCard({ plan }: { plan: MembershipPlan }) {
+function PlanCard({ plan }) {
   return (
     <div className="flex flex-col overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-[var(--shadow-card)]">
       <div className="relative aspect-[3/2] overflow-hidden border-b border-[var(--color-border)]">

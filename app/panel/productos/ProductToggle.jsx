@@ -3,7 +3,7 @@
 import { useTransition } from "react";
 import { toggleProductEnabled } from "./actions";
 
-export function ProductToggle({ id, enabled }: { id: string; enabled: boolean }) {
+export function ProductToggle({ id, enabled }) {
   const [pending, startTransition] = useTransition();
 
   return (
