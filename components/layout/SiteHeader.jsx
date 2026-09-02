@@ -1,11 +1,12 @@
 import Image from "next/image";
+import NextLink from "next/link";
 import { LinkButton } from "@/components/ui/Button";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-[var(--color-primary)]">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3">
-        <a href="#top" aria-label="Orgullo Cazurro — inicio">
+        <a href="/#top" aria-label="Orgullo Cazurro — inicio">
           <Image
             src="/images/logo.webp"
             alt="Escudo de Orgullo Cazurro, afición de la Cultural y Deportiva Leonesa"
@@ -16,9 +17,18 @@ export function SiteHeader() {
           />
         </a>
 
-        <LinkButton href="#planes" variant="ghost-white" className="!px-4 !py-2 text-xs">
-          Carnet socio 26/27
-        </LinkButton>
+        <div className="flex items-center gap-6">
+          <NextLink
+            href="/tienda"
+            className="text-xs font-semibold tracking-[0.1em] text-white uppercase hover:text-white/80"
+          >
+            Tienda
+          </NextLink>
+
+          <LinkButton href="/#planes" variant="ghost-white" className="!px-4 !py-2 text-xs">
+            Carnet socio 26/27
+          </LinkButton>
+        </div>
       </div>
     </header>
   );
