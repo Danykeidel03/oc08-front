@@ -1,8 +1,12 @@
 import Image from "next/image";
 import NextLink from "next/link";
 import { LinkButton } from "@/components/ui/Button";
+import { CartMenu } from "@/components/layout/CartMenu";
+import { getCart } from "@/lib/cart";
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const cart = await getCart();
+
   return (
     <header className="sticky top-0 z-50 bg-[var(--color-primary)]">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3">
@@ -24,6 +28,8 @@ export function SiteHeader() {
           >
             Tienda
           </NextLink>
+
+          <CartMenu cart={cart} />
 
           <LinkButton href="/#planes" variant="ghost-white" className="!px-4 !py-2 text-xs">
             Carnet socio 26/27

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { Button } from "@/components/ui/Button";
+import { AddToCartForm } from "./AddToCartForm";
 import { backendUrl } from "@/lib/backend";
 import { SITE_URL } from "@/lib/site";
 import styles from "./page.module.css";
@@ -139,9 +139,11 @@ export default async function ProductPage({ params }) {
 
             <p className={styles.description}>{product.description}</p>
 
-            <Button type="button" variant="primary" disabled className={styles.buyButton}>
-              Comprar (próximamente)
-            </Button>
+            {product.inStock ? (
+              <AddToCartForm product={product} />
+            ) : (
+              <p className={styles.outOfStock}>Sin stock por ahora.</p>
+            )}
           </div>
         </div>
       </main>

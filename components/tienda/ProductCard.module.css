@@ -12,6 +12,12 @@
   box-shadow: 0 20px 40px -15px rgb(0 0 0 / 0.5);
 }
 
+.card__link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .card__media {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -96,4 +102,31 @@
 .card:hover .card__cta {
   background: var(--color-primary);
   color: #ffffff;
+}
+
+.card__addForm {
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+.card__addButton {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  padding: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  transition: background-color var(--transition-duration) ease;
+}
+
+.card__addButton:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.card__addButton:disabled {
+  cursor: not-allowed;
+  background: #d4d4d4;
+  color: #737373;
 }

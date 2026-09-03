@@ -127,12 +127,11 @@
   color: var(--color-muted);
 }
 
-.buyButton {
+.outOfStock {
   margin-top: 0.5rem;
-  width: 100%;
-}
-
-.buyButton:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
 }
