@@ -14,10 +14,10 @@ const sections = [
     available: true,
   },
   {
-    href: "#",
+    href: "/panel/pedidos",
     title: "Pedidos",
     description: "Listado de pedidos y detalle de cada compra.",
-    available: false,
+    available: true,
   },
   {
     href: "#",
