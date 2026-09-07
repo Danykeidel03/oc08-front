@@ -20,16 +20,16 @@ const sections = [
     available: true,
   },
   {
-    href: "#",
+    href: "/panel/noticias",
     title: "Noticias",
     description: "Avisos que salen en \"Últimos anuncios\" de la home.",
-    available: false,
+    available: true,
   },
   {
-    href: "#",
+    href: "/panel/slider",
     title: "Slider",
     description: "Fotos del banner principal de la portada.",
-    available: false,
+    available: true,
   },
 ];
 
