@@ -29,7 +29,7 @@ const sections = [
     href: "/panel/slider",
     title: "Slider",
     description: "Fotos del banner principal de la portada.",
-    available: true,
+    available: false,
   },
 ];
 
