@@ -125,6 +125,11 @@
   background: var(--color-primary-hover);
 }
 
+.card__addButton--added,
+.card__addButton--added:hover:not(:disabled) {
+  background: #166534;
+}
+
 .card__addButton:disabled {
   cursor: not-allowed;
   background: #d4d4d4;

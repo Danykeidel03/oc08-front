@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { quickAddToCart } from "@/app/carrito/actions";
+import { AddToCartButton } from "@/components/tienda/AddToCartButton";
 import styles from "./ProductCard.module.css";
 
 const BADGE_LABELS = {
@@ -40,13 +40,7 @@ export function ProductCard({ product }) {
         </div>
       </Link>
 
-      <form action={quickAddToCart} className={styles.card__addForm}>
-        <input type="hidden" name="productId" value={product.id} />
-        <input type="hidden" name="quantity" value="1" />
-        <button type="submit" disabled={!product.inStock} className={styles.card__addButton}>
-          {product.inStock ? "Añadir al carrito" : "Sin stock"}
-        </button>
-      </form>
+      <AddToCartButton productId={product.id} inStock={product.inStock} />
     </div>
   );
 }

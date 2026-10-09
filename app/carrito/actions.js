@@ -48,18 +48,14 @@ async function addItem(formData) {
     return { error: body?.error ?? "No se pudo añadir al carrito", success: false };
   }
 
-  revalidatePath("/carrito");
+  // El contador del header vive en el layout: sin esto no se actualiza al añadir.
+  revalidatePath("/", "layout");
   return { error: null, success: true };
 }
 
-// Para <form action={addToCart}> usado con useActionState (ficha de producto).
+// Para <form action={addToCart}> usado con useActionState (ficha y tarjeta de producto).
 export async function addToCart(_prevState, formData) {
   return addItem(formData);
-}
-
-// Para <form action={quickAddToCart}> plano, sin useActionState (tarjeta de producto en /tienda).
-export async function quickAddToCart(formData) {
-  await addItem(formData);
 }
 
 export async function updateCartItem(itemId, quantity) {
