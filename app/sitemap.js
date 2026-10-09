@@ -31,6 +31,12 @@ export default async function sitemap() {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: `${SITE_URL}/sobre-nosotros`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
     ...products.map((product) => ({
       url: `${SITE_URL}/tienda/${product.slug}`,
       lastModified: product.updatedAt,

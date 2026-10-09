@@ -29,6 +29,13 @@ export async function SiteHeader() {
             Tienda
           </NextLink>
 
+          <NextLink
+            href="/sobre-nosotros"
+            className="text-xs font-semibold tracking-[0.1em] text-white uppercase hover:text-white/80"
+          >
+            Sobre nosotros
+          </NextLink>
+
           <CartMenu cart={cart} />
 
           <LinkButton href="/#planes" variant="ghost-white" className="!px-4 !py-2 text-xs">
