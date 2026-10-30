@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/ui/Button";
 import { cookies } from "next/headers";
 import { adminHeaders, backendUrl } from "@/lib/backend";
 import { LAST_ORDER_COOKIE } from "@/lib/lastOrder";
+import { AutoRefresh } from "./AutoRefresh";
 
 export const metadata = {
   title: "Pedido confirmado — Orgullo Cazurro",
@@ -45,14 +46,32 @@ export default async function CheckoutGraciasPage({ params }) {
     notFound();
   }
 
+  // Con pago online, "pagado" lo confirma el webhook de Stripe, no esta redirección.
+  const isOnline = order.paymentMethod === "tarjeta";
+  const awaitingPayment = isOnline && order.status === "pending";
+  const failed = order.status === "cancelled";
+
   return (
     <>
       <SiteHeader />
       <main className="mx-auto flex min-h-screen max-w-2xl flex-col gap-6 px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-white">Pedido confirmado</h1>
+        {awaitingPayment && <AutoRefresh orderId={order.id} />}
+
+        <h1 className="text-2xl font-bold text-white">
+          {failed
+            ? "Pago no completado"
+            : awaitingPayment
+              ? "Confirmando tu pago…"
+              : isOnline
+                ? "Pago confirmado"
+                : "Pedido confirmado"}
+        </h1>
         <p className="text-[color:var(--color-muted)]">
-          Gracias, {order.customerName}. Te contactaremos a {order.customerEmail} con los
-          próximos pasos.
+          {failed
+            ? "Este pedido se ha cancelado y no se ha hecho ningún cargo."
+            : awaitingPayment
+              ? "Estamos esperando la confirmación de tu banco. Esto tarda unos segundos; no cierres esta página."
+              : `Gracias, ${order.customerName}. Te contactaremos a ${order.customerEmail} con los próximos pasos.`}
         </p>
 
         <ul className="flex flex-col gap-2 rounded-[var(--radius-md)] border border-[color:var(--color-border)] bg-[color:var(--color-bg-elevated)] p-4 text-left">
