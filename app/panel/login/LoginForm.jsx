@@ -26,7 +26,9 @@ export function LoginForm() {
 
       {state.error && (
         <p className="text-sm text-white" role="alert">
-          Contraseña incorrecta.
+          {state.locked
+            ? "Demasiados intentos. Inténtalo de nuevo en 15 minutos."
+            : "Contraseña incorrecta."}
         </p>
       )}
 

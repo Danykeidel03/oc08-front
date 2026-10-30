@@ -2,20 +2,26 @@
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { backendUrl } from "@/lib/backend";
+import { adminHeaders, backendUrl } from "@/lib/backend";
 import { CART_COOKIE } from "@/lib/cart";
 
 async function ensureCartId(cookieStore) {
   const existing = cookieStore.get(CART_COOKIE)?.value;
 
   if (existing) {
-    const res = await fetch(backendUrl(`/api/cart/${existing}`), { cache: "no-store" });
+    const res = await fetch(backendUrl(`/api/cart/${existing}`), {
+      headers: adminHeaders(),
+      cache: "no-store",
+    });
     if (res.ok) {
       return existing;
     }
   }
 
-  const created = await fetch(backendUrl("/api/cart"), { method: "POST" });
+  const created = await fetch(backendUrl("/api/cart"), {
+    method: "POST",
+    headers: adminHeaders(),
+  });
   const cart = await created.json();
 
   cookieStore.set(CART_COOKIE, cart.id, {
@@ -35,7 +41,7 @@ async function addItem(formData) {
 
   const res = await fetch(backendUrl(`/api/cart/${cartId}/items`), {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { ...adminHeaders(), "Content-Type": "application/json" },
     body: JSON.stringify({
       productId: formData.get("productId"),
       quantity: formData.get("quantity"),
@@ -72,7 +78,7 @@ export async function updateCartItem(itemId, quantity) {
 
   await fetch(backendUrl(`/api/cart/${cartId}/items/${itemId}`), {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: { ...adminHeaders(), "Content-Type": "application/json" },
     body: JSON.stringify({ quantity }),
   });
 
@@ -87,7 +93,10 @@ export async function removeCartItem(itemId) {
     return;
   }
 
-  await fetch(backendUrl(`/api/cart/${cartId}/items/${itemId}`), { method: "DELETE" });
+  await fetch(backendUrl(`/api/cart/${cartId}/items/${itemId}`), {
+    method: "DELETE",
+    headers: adminHeaders(),
+  });
 
   revalidatePath("/carrito");
 }

@@ -5,7 +5,7 @@ export const config = {
   matcher: ["/panel/:path*"],
 };
 
-export function middleware(request) {
+export async function middleware(request) {
   const { pathname } = request.nextUrl;
 
   if (pathname === "/panel/login") {
@@ -14,7 +14,7 @@ export function middleware(request) {
 
   const session = request.cookies.get(PANEL_SESSION_COOKIE)?.value;
 
-  if (!isValidPanelSession(session)) {
+  if (!(await isValidPanelSession(session))) {
     const loginUrl = new URL("/panel/login", request.url);
     return NextResponse.redirect(loginUrl);
   }

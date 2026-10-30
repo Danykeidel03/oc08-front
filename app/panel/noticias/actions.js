@@ -3,8 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { adminHeaders, backendUrl } from "@/lib/backend";
+import { requirePanelSession } from "@/lib/panelAuth";
 
 export async function createNews(_prevState, formData) {
+  await requirePanelSession();
+
   const res = await fetch(backendUrl("/api/news"), {
     method: "POST",
     headers: adminHeaders(),
@@ -21,6 +24,8 @@ export async function createNews(_prevState, formData) {
 }
 
 export async function updateNews(id, _prevState, formData) {
+  await requirePanelSession();
+
   const res = await fetch(backendUrl(`/api/news/${id}`), {
     method: "PATCH",
     headers: adminHeaders(),
@@ -37,6 +42,8 @@ export async function updateNews(id, _prevState, formData) {
 }
 
 export async function deleteNews(id) {
+  await requirePanelSession();
+
   const res = await fetch(backendUrl(`/api/news/${id}`), {
     method: "DELETE",
     headers: adminHeaders(),

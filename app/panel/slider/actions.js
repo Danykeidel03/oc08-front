@@ -2,8 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { adminHeaders, backendUrl } from "@/lib/backend";
+import { requirePanelSession } from "@/lib/panelAuth";
 
 export async function uploadSliderImage(_prevState, formData) {
+  await requirePanelSession();
+
   const res = await fetch(backendUrl("/api/slider-images"), {
     method: "POST",
     headers: adminHeaders(),
@@ -20,6 +23,8 @@ export async function uploadSliderImage(_prevState, formData) {
 }
 
 export async function deleteSliderImage(id) {
+  await requirePanelSession();
+
   const res = await fetch(backendUrl(`/api/slider-images/${id}`), {
     method: "DELETE",
     headers: adminHeaders(),
@@ -33,6 +38,8 @@ export async function deleteSliderImage(id) {
 }
 
 export async function reorderSliderImages(order) {
+  await requirePanelSession();
+
   const res = await fetch(backendUrl("/api/slider-images/reorder"), {
     method: "PATCH",
     headers: { ...adminHeaders(), "Content-Type": "application/json" },

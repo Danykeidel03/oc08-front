@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { LinkButton } from "@/components/ui/Button";
-import { backendUrl } from "@/lib/backend";
+import { cookies } from "next/headers";
+import { adminHeaders, backendUrl } from "@/lib/backend";
+import { LAST_ORDER_COOKIE } from "@/lib/lastOrder";
 
 export const metadata = {
   title: "Pedido confirmado — Orgullo Cazurro",
@@ -12,7 +14,10 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 async function getOrder(id) {
-  const res = await fetch(backendUrl(`/api/checkout/${id}`), { cache: "no-store" });
+  const res = await fetch(backendUrl(`/api/checkout/${id}`), {
+    headers: adminHeaders(),
+    cache: "no-store",
+  });
 
   if (res.status === 404) {
     return null;
@@ -27,6 +32,13 @@ async function getOrder(id) {
 
 export default async function CheckoutGraciasPage({ params }) {
   const { id } = await params;
+  const cookieStore = await cookies();
+
+  // Sin la cookie del pedido recién hecho, el id solo no da acceso a datos personales.
+  if (cookieStore.get(LAST_ORDER_COOKIE)?.value !== id) {
+    notFound();
+  }
+
   const order = await getOrder(id);
 
   if (!order) {

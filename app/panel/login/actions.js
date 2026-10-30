@@ -1,24 +1,46 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { isValidPanelPassword } from "@/lib/panelAuth";
-import { PANEL_SESSION_COOKIE } from "@/lib/panelSession";
+import {
+  clearFailedLogins,
+  isLoginLocked,
+  isValidPanelPassword,
+  recordFailedLogin,
+} from "@/lib/panelAuth";
+import {
+  createPanelSession,
+  PANEL_SESSION_COOKIE,
+  PANEL_SESSION_MAX_AGE,
+} from "@/lib/panelSession";
 
 export async function loginAction(_prevState, formData) {
   const password = String(formData.get("password") ?? "");
 
+  const headerStore = await headers();
+  const ip =
+    headerStore.get("cf-connecting-ip") ??
+    headerStore.get("x-forwarded-for")?.split(",")[0].trim() ??
+    "unknown";
+
+  if (isLoginLocked(ip)) {
+    return { error: true, locked: true };
+  }
+
   if (!isValidPanelPassword(password)) {
+    recordFailedLogin(ip);
     return { error: true };
   }
 
+  clearFailedLogins(ip);
+
   const cookieStore = await cookies();
-  cookieStore.set(PANEL_SESSION_COOKIE, process.env.PANEL_SESSION_SECRET, {
+  cookieStore.set(PANEL_SESSION_COOKIE, await createPanelSession(), {
     httpOnly: true,
     secure: true,
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 30,
+    maxAge: PANEL_SESSION_MAX_AGE,
   });
 
   redirect("/panel");

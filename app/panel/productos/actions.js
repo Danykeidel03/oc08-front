@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { adminHeaders, backendUrl } from "@/lib/backend";
+import { requirePanelSession } from "@/lib/panelAuth";
 import { PANEL_SESSION_COOKIE } from "@/lib/panelSession";
 
 export async function logoutAction() {
@@ -13,6 +14,8 @@ export async function logoutAction() {
 }
 
 export async function toggleProductEnabled(id, enabled) {
+  await requirePanelSession();
+
   const res = await fetch(backendUrl(`/api/products/${id}/enabled`), {
     method: "PATCH",
     headers: { ...adminHeaders(), "Content-Type": "application/json" },
@@ -27,6 +30,8 @@ export async function toggleProductEnabled(id, enabled) {
 }
 
 export async function updateProduct(id, _prevState, formData) {
+  await requirePanelSession();
+
   const payload = {
     name: formData.get("name"),
     description: formData.get("description"),
@@ -53,6 +58,8 @@ export async function updateProduct(id, _prevState, formData) {
 }
 
 export async function createProduct(_prevState, formData) {
+  await requirePanelSession();
+
   const res = await fetch(backendUrl("/api/products"), {
     method: "POST",
     headers: adminHeaders(),

@@ -2,8 +2,9 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { backendUrl } from "@/lib/backend";
+import { adminHeaders, backendUrl } from "@/lib/backend";
 import { CART_COOKIE } from "@/lib/cart";
+import { LAST_ORDER_COOKIE } from "@/lib/lastOrder";
 
 export async function submitCheckout(_prevState, formData) {
   const cookieStore = await cookies();
@@ -26,7 +27,7 @@ export async function submitCheckout(_prevState, formData) {
 
   const res = await fetch(backendUrl("/api/checkout"), {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { ...adminHeaders(), "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
 
@@ -37,5 +38,13 @@ export async function submitCheckout(_prevState, formData) {
 
   const order = await res.json();
   cookieStore.delete(CART_COOKIE);
+  // Prueba de propiedad: solo quien hizo el pedido puede ver /checkout/gracias/[id].
+  cookieStore.set(LAST_ORDER_COOKIE, order.id, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    path: "/checkout/gracias",
+    maxAge: 60 * 60,
+  });
   redirect(`/checkout/gracias/${order.id}`);
 }
