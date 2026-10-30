@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { backendUrl } from "@/lib/backend";
@@ -40,6 +41,12 @@ export const metadata = {
 export const revalidate = 300;
 
 const dateFormatter = new Intl.DateTimeFormat("es-ES", { dateStyle: "long" });
+const EXCERPT_LENGTH = 160;
+
+function excerpt(text) {
+  if (text.length <= EXCERPT_LENGTH) return text;
+  return `${text.slice(0, EXCERPT_LENGTH).trimEnd()}…`;
+}
 
 async function getNews() {
   try {
@@ -78,7 +85,7 @@ export default async function NoticiasPage() {
             {news.map((item) => (
               <article
                 key={item.id}
-                className="flex flex-col overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-[var(--shadow-card)]"
+                className="relative flex flex-col overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-[var(--shadow-card)]"
               >
                 {item.image && (
                   <div className="relative aspect-[16/10] overflow-hidden">
@@ -98,10 +105,15 @@ export default async function NoticiasPage() {
                   >
                     {dateFormatter.format(new Date(item.createdAt))}
                   </time>
-                  <h2 className="font-display text-lg font-bold text-white">{item.title}</h2>
-                  <p className="text-sm whitespace-pre-line text-[var(--color-muted)]">
-                    {item.content}
-                  </p>
+                  <h2 className="font-display text-lg font-bold text-white">
+                    <Link href={`/noticias/${item.id}`} className="after:absolute after:inset-0 hover:underline">
+                      {item.title}
+                    </Link>
+                  </h2>
+                  <p className="text-sm text-[var(--color-muted)]">{excerpt(item.content)}</p>
+                  <span className="mt-auto pt-2 text-xs font-semibold tracking-[0.1em] text-white uppercase">
+                    Leer más →
+                  </span>
                 </div>
               </article>
             ))}

@@ -15,8 +15,22 @@ async function getProducts() {
   }
 }
 
+async function getNews() {
+  try {
+    const res = await fetch(backendUrl("/api/news"));
+
+    if (!res.ok) {
+      return [];
+    }
+
+    return res.json();
+  } catch {
+    return [];
+  }
+}
+
 export default async function sitemap() {
-  const products = await getProducts();
+  const [products, news] = await Promise.all([getProducts(), getNews()]);
 
   return [
     {
@@ -43,6 +57,12 @@ export default async function sitemap() {
       changeFrequency: "yearly",
       priority: 0.5,
     },
+    ...news.map((item) => ({
+      url: `${SITE_URL}/noticias/${item.id}`,
+      lastModified: item.updatedAt,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    })),
     ...products.map((product) => ({
       url: `${SITE_URL}/tienda/${product.slug}`,
       lastModified: product.updatedAt,
