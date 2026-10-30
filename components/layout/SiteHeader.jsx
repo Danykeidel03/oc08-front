@@ -30,6 +30,13 @@ export async function SiteHeader() {
           </NextLink>
 
           <NextLink
+            href="/noticias"
+            className="text-xs font-semibold tracking-[0.1em] text-white uppercase hover:text-white/80"
+          >
+            Noticias
+          </NextLink>
+
+          <NextLink
             href="/sobre-nosotros"
             className="text-xs font-semibold tracking-[0.1em] text-white uppercase hover:text-white/80"
           >

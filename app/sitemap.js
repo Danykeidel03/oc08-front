@@ -32,6 +32,12 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${SITE_URL}/noticias`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
       url: `${SITE_URL}/sobre-nosotros`,
       lastModified: new Date(),
       changeFrequency: "yearly",
