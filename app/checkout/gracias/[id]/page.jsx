@@ -90,9 +90,16 @@ export default async function CheckoutGraciasPage({ params }) {
             </li>
           ))}
 
+          {Number(order.shippingCost) > 0 && (
+            <li className="flex items-center justify-between text-sm text-[color:var(--color-muted)]">
+              <span>Envío a domicilio</span>
+              <span className="text-white">{Number(order.shippingCost).toFixed(2)} €</span>
+            </li>
+          )}
+
           <li className="flex items-center justify-between border-t border-[color:var(--color-border)] pt-2 font-semibold">
             <span className="text-white">Total</span>
-            <span className="text-[color:var(--color-accent)]">{order.total} €</span>
+            <span className="text-[color:var(--color-accent)]">{Number(order.total).toFixed(2)} €</span>
           </li>
         </ul>
 

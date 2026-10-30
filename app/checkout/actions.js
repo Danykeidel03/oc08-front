@@ -20,9 +20,11 @@ export async function submitCheckout(_prevState, formData) {
     customerName: formData.get("customerName"),
     customerEmail: formData.get("customerEmail"),
     customerPhone: formData.get("customerPhone"),
-    shippingAddress: formData.get("shippingAddress"),
-    shippingCity: formData.get("shippingCity"),
-    shippingPostalCode: formData.get("shippingPostalCode"),
+    shippingType: formData.get("shippingType"),
+    // En recogida no hay campos de dirección: se omiten (JSON descarta undefined).
+    shippingAddress: formData.get("shippingAddress") ?? undefined,
+    shippingCity: formData.get("shippingCity") ?? undefined,
+    shippingPostalCode: formData.get("shippingPostalCode") ?? undefined,
     paymentMethod: formData.get("paymentMethod"),
   };
 

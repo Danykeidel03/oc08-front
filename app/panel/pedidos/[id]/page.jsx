@@ -62,9 +62,18 @@ export default async function PanelPedidoDetallePage({ params }) {
         </div>
         <div>
           <p className="text-xs uppercase tracking-wide text-[color:var(--color-muted)]">Envío</p>
-          <p className="text-white">{order.shippingAddress}</p>
+          {order.shippingType === "recogida" ? (
+            <p className="text-white">Recogida en local</p>
+          ) : (
+            <>
+              <p className="text-white">{order.shippingAddress}</p>
+              <p className="text-sm text-[color:var(--color-muted)]">
+                {order.shippingCity}, {order.shippingPostalCode}
+              </p>
+            </>
+          )}
           <p className="text-sm text-[color:var(--color-muted)]">
-            {order.shippingCity}, {order.shippingPostalCode}
+            Coste de envío: {Number(order.shippingCost).toFixed(2)} €
           </p>
         </div>
         <div>
@@ -101,7 +110,7 @@ export default async function PanelPedidoDetallePage({ params }) {
       </section>
 
       <div className="flex items-center justify-end border-t border-[color:var(--color-border)] pt-4">
-        <span className="text-lg font-bold text-white">Total: {order.total} €</span>
+        <span className="text-lg font-bold text-white">Total: {Number(order.total).toFixed(2)} €</span>
       </div>
     </main>
   );
